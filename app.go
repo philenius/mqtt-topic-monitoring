@@ -59,7 +59,7 @@ func main() {
 
 	client := MQTT.NewClient(opts)
 	if token := client.Connect(); token.Wait() && token.Error() != nil {
-		log.Error("failed to create MQTT client", "error", err.Error())
+		log.Error("failed to create MQTT client", "error", token.Error().Error())
 		os.Exit(1)
 	}
 
@@ -69,7 +69,7 @@ func main() {
 		go func(topic string) {
 
 			if token := client.Subscribe(topic, byte(*qos), nil); token.Wait() && token.Error() != nil {
-				log.Error("failed to subscribe to topic", "topic", topic, "error", err.Error())
+				log.Error("failed to subscribe to topic", "topic", topic, "error", token.Error().Error())
 				os.Exit(2)
 			}
 			log.Info("successfully subscribed to topic", "topic", topic)

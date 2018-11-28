@@ -16,6 +16,7 @@ docker run -it -p 1883:1883 eclipse-mosquitto
 ## Build and run this app
 
 ```bash
+go get
 go build
 
 LOGXI=* ./mqtt-monitoring -broker "tcp://127.0.0.1:1883" -topics "test"
